@@ -11,6 +11,7 @@ pipeline {
       steps {
         sh '''#!/bin/bash
         echo "Testing"'''
+        sh 'ansible --version'
       }
     }
     stage('Deploy') {
