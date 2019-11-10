@@ -12,6 +12,7 @@ pipeline {
         sh '''#!/bin/bash
         echo "Testing"'''
         sh 'ansible --version'
+        sh 'docker --version'
       }
     }
     stage('Deploy') {
