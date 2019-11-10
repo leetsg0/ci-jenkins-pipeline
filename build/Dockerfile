@@ -1,7 +1,10 @@
 FROM python:3.7.3-stretch
 
-# Add 
-ADD source/helloworld.py
+#Set working directory
+#WORKDIR /app
+
+# Add python source code to directory
+ADD source /app/
 
 # Run script at container launch
-CMD ["python", "./helloworld.py]
+CMD ["python", "app/helloworld.py"]
