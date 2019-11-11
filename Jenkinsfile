@@ -20,8 +20,7 @@ pipeline {
     stage('Container Push') {
       steps {
         echo 'Push Container to AWS ECR'
-        docker.withRegistry('https://133823844190.dkr.ecr.us-west-2.amazonaws.com/udacity', 'ecr:us-west-2:udacity-ecr-credentials') {
-          docker.image('myhelloworld').push('latest')
+        
         }
       }
     }
