@@ -20,8 +20,6 @@ pipeline {
     stage('Container Push') {
       steps {
         echo 'Push Container to AWS ECR'
-        
-        }
       }
     }
   }
