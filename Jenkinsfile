@@ -5,8 +5,8 @@ pipeline {
       steps {
         echo 'Build Container'
         sh 'ls'
-        sh 'sudo docker build -f build/Dockerfile . --tag=myhelloworld'
-        sh 'sudo docker image ls'
+        sh 'docker build -f build/Dockerfile . --tag=myhelloworld'
+        sh 'docker image ls'
       }
     }
     stage('Test') {
