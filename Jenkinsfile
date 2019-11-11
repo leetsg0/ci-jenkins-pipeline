@@ -3,9 +3,10 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo 'Build Code'
+        echo 'Build Container'
         sh 'ls'
-        sh 'aws s3 ls'
+        sh 'docker build -f build/Dockerfile . --tag=myhelloworld'
+        sh 'docker image ls'
       }
     }
     stage('Test') {
@@ -16,9 +17,9 @@ pipeline {
         sh 'docker --version'
       }
     }
-    stage('Deploy') {
+    stage('Container Push') {
       steps {
-        echo 'Deploying to Cluster'
+        echo 'Push Container to AWS ECR'
       }
     }
   }
