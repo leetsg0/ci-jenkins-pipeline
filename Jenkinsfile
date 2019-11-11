@@ -5,6 +5,7 @@ pipeline {
       steps {
         echo 'Build Code'
         sh 'ls'
+        sh 'aws s3 ls'
       }
     }
     stage('Test') {
