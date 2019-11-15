@@ -22,7 +22,7 @@ pipeline {
     stage('Container Push') {
       steps {
         echo 'Push Container to AWS ECR'
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'devops-user1', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
           AWS("s3 ls")
         }
       }
