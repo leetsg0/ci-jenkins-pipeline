@@ -1,5 +1,3 @@
-@Library('github.com/releaseworks/jenkinslib') _
-
 pipeline {
   agent any
   stages {
@@ -19,9 +17,9 @@ pipeline {
         sh 'docker --version'
       }
     }
-    stage('Container Push') {
+    stage('Push Image') {
       steps {
-        echo 'Push Container to AWS ECR'
+        echo 'Push Image to AWS ECR'
         docker.withRegistry('http://133823844190.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:devops-user1') {
           sh 'docker push 133823844190.dkr.ecr.us-west-2.amazonaws.com/udacity-hub:myhelloworld'
         }
