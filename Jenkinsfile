@@ -7,7 +7,7 @@ pipeline {
       steps {
         echo 'Build Container'
         sh 'ls'
-        sh 'docker build -f build/Dockerfile . --tag=myhelloworld'
+        sh 'docker build -f build/Dockerfile . --tag=133823844190.dkr.ecr.us-west-2.amazonaws.com/udacity-hub:myhelloworld'
         sh 'docker image ls'
       }
     }
@@ -22,8 +22,8 @@ pipeline {
     stage('Container Push') {
       steps {
         echo 'Push Container to AWS ECR'
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'devops-user1', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-          AWS("s3 ls")
+        docker.withRegistry('http://133823844190.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:devops-user1') {
+          sh 'docker push 133823844190.dkr.ecr.us-west-2.amazonaws.com/udacity-hub:myhelloworld'
         }
       }
     }
