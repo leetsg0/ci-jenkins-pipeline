@@ -5,7 +5,7 @@ pipeline {
       steps {
         echo 'Build Container'
         sh 'ls'
-        sh 'docker build -f build/Dockerfile . --tag=133823844190.dkr.ecr.us-west-2.amazonaws.com/udacity-hub:myhelloworld'
+        sh 'docker build -f build/Dockerfile . --tag=133823844190.dkr.ecr.us-west-2.amazonaws.com/udacity-hub:mywebapp'
         sh 'docker image ls'
       }
     }
@@ -22,7 +22,7 @@ pipeline {
         echo 'Pushing Image to AWS ECR'
         script {
           docker.withRegistry('http://133823844190.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:devops-user1') {
-            sh 'docker push 133823844190.dkr.ecr.us-west-2.amazonaws.com/udacity-hub:myhelloworld'
+            sh 'docker push 133823844190.dkr.ecr.us-west-2.amazonaws.com/udacity-hub:mywebapp'
           }
         }
       }
