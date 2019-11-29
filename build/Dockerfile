@@ -1,10 +1,11 @@
-FROM python:3.7.3-stretch
+FROM ubuntu
 
-#Set working directory
-#WORKDIR /app
+RUN apt-get update
 
-# Add python source code to directory
-ADD source /app/
+RUN apt-get install nginx -y
 
-# Run script at container launch
-CMD ["python", "app/helloworld.py"]
+COPY index.html /var/www/html/
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
