@@ -15,6 +15,9 @@ pipeline {
         echo "Testing"'''
         sh 'ansible --version'
         sh 'docker --version'
+        sh 'apt install -y make'
+        sh 'wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.17.2/hadolint-Linux-x86_64 &&  sudo chmod +x /bin/hadolint'
+        sh 'hadolint build/Dockerfile'
       }
     }
     stage('Push Image') {
