@@ -15,8 +15,7 @@ pipeline {
         echo "Testing"'''
         sh 'ansible --version'
         sh 'docker --version'
-        sh 'sudo su jenkins'
-        sh 'wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.17.2/hadolint-Linux-x86_64 &&  sudo chmod +x /bin/hadolint'
+        sh 'sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.17.2/hadolint-Linux-x86_64 &&  sudo chmod +x /bin/hadolint'
         sh 'hadolint build/Dockerfile'
       }
     }
