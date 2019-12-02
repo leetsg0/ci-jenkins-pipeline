@@ -25,7 +25,9 @@ pipeline {
       steps {
         echo 'Deploy AWS Infrastructure'
         sh 'ls -al blue-green-kube-deploy/'
+        sh 'blue-green-kube-deploy/create.sh infra-stack blue-green-kube-deploy/bginfra.yml blue-green-kube-deploy/networkinfra-params.json'
         echo 'Deploy Cluster'
+        sh 'blue-green-kube-deploy/create.sh app-stack blue-green-kube-deploy/deployapp.yml blue-green-kube-deploy/server-params.json'
       }
     }
   }
