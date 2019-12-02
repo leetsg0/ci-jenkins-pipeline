@@ -23,9 +23,10 @@ pipeline {
     }
     stage('Deploy Infrastructure and Cluster') {
       steps {
-        sh 'cd blue-green-kube-deploy'
         echo 'Deploy AWS Infrastructure'
-        sh 'ls -al'        
+        sh 'ls -al'
+        sh 'cd blue-green-kube-deploy/'
+        sh 'ls -al'
         echo 'Deploy Cluster'
       }
     }
