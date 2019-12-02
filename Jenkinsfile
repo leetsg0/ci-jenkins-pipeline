@@ -1,25 +1,17 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
+    stage('Lint and Build') {
       steps {
+        echo 'Linting..."
+        sh 'sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.17.2/hadolint-Linux-x86_64 &&  sudo chmod +x /bin/hadolint'
+        sh 'hadolint build/Dockerfile'
         echo 'Build Container'
-        sh 'ls'
         sh 'docker build -f build/Dockerfile . --tag=133823844190.dkr.ecr.us-west-2.amazonaws.com/udacity-hub:mywebapp'
         sh 'docker image ls'
       }
     }
-    stage('Test') {
-      steps {
-        sh '''#!/bin/bash
-        echo "Testing"'''
-        sh 'ansible --version'
-        sh 'docker --version'
-        sh 'sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.17.2/hadolint-Linux-x86_64 &&  sudo chmod +x /bin/hadolint'
-        sh 'hadolint build/Dockerfile'
-      }
-    }
-    stage('Push Image') {
+    stage('Push Image to ECR') {
       steps {
         echo 'Pushing Image to AWS ECR'
         script {
@@ -27,6 +19,15 @@ pipeline {
             sh 'docker push 133823844190.dkr.ecr.us-west-2.amazonaws.com/udacity-hub:mywebapp'
           }
         }
+      }
+    }
+    stage('Deploy Infrastructure and Cluster') {
+      steps {
+        sh 'git clone https://github.com/leetsg0/blue-green-kube-deploy.git'
+        echo 'Deploy AWS Infrastructure'
+        sh './create.sh infra-stack bginfra.yml networkinfra-params.json'
+        echo 'Deploy Cluster'
+        sh './create.sh app-stack deployapp.yml server-params.json'        
       }
     }
   }
