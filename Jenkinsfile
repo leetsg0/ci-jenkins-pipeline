@@ -23,7 +23,6 @@ pipeline {
     }
     stage('Deploy Infrastructure and Cluster') {
       steps {
-        sh 'git clone https://github.com/leetsg0/blue-green-kube-deploy.git'
         sh 'cd blue-green-kube-deploy'
         echo 'Deploy AWS Infrastructure'
         sh './create.sh infra-stack bginfra.yml networkinfra-params.json'
