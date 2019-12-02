@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Lint and Build') {
       steps {
-        echo 'Linting..."
+        echo 'Linting'
         sh 'sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.17.2/hadolint-Linux-x86_64 &&  sudo chmod +x /bin/hadolint'
         sh 'hadolint build/Dockerfile'
         echo 'Build Container'
