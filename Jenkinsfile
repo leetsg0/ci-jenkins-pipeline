@@ -28,6 +28,9 @@ pipeline {
         sh 'blue-green-kube-deploy/create.sh infra-stack blue-green-kube-deploy/bginfra.yml blue-green-kube-deploy/networkinfra-params.json'
       }
     }
+    options {
+      timeout(time: 2, units: 'MINUTES')
+    }
     stage('Deploy Container in Cluster') {
       steps {
         echo 'Deploying Container in Cluster'
